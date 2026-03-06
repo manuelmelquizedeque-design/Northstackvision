@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>North Stack — Content Growth Systems</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#07111F;
+  --navy2:#0C1A2E;
+  --navy3:#112040;
+  --cyan:#00B4E6;
+  --teal:#00D4B0;
+  --white:#EEF4FF;
+  --grey:#6B82A8;
+  --grey2:#8FA4C4;
+  --border:rgba(0,180,230,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── UTILS ── */
+.syne{font-family:'Syne',sans-serif}
+.mono{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--cyan);font-weight:600}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.grad{background:linear-gradient(135deg,var(--cyan),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(7,17,31,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1080px;margin:0 auto;padding:0 24px;height:60px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--white);letter-spacing:-.01em}
+.logo-text span{color:var(--cyan)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:13px;color:var(--grey2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-right{display:flex;align-items:center;gap:8px}
+.lang-btn{background:none;border:1px solid var(--border);color:var(--grey2);font-size:10px;font-weight:700;letter-spacing:.1em;padding:5px 10px;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.lang-btn.on,.lang-btn:hover{background:var(--cyan);border-color:var(--cyan);color:var(--navy)}
+.nav-cta{background:var(--cyan);color:var(--navy);border:none;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;padding:9px 20px;cursor:pointer;text-decoration:none;letter-spacing:.04em;transition:all .2s;white-space:nowrap}
+.nav-cta:hover{background:var(--teal)}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;padding:100px 0 80px;position:relative;overflow:hidden;background:var(--navy)}
+.hero-glow{position:absolute;top:0;right:0;width:600px;height:600px;background:radial-gradient(ellipse at center,rgba(0,180,230,.06) 0%,transparent 70%);pointer-events:none}
+.hero-glow2{position:absolute;bottom:0;left:0;width:400px;height:400px;background:radial-gradient(ellipse at center,rgba(0,212,176,.04) 0%,transparent 70%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,180,230,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,180,230,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:680px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);padding:7px 14px;margin-bottom:28px;background:rgba(0,180,230,.04)}
+.hero-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+.hero-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,56px);line-height:1.08;letter-spacing:-.02em;margin-bottom:20px;color:var(--white)}
+.hero-title .hl{color:var(--cyan)}
+.hero-title .ghost{-webkit-text-stroke:1px rgba(238,244,255,.2);color:transparent;display:block}
+.hero-sub{font-size:15px;line-height:1.8;color:var(--grey2);max-width:520px;margin-bottom:36px;font-weight:300}
+.hero-sub strong{color:var(--white);font-weight:500}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+.btn-p{background:linear-gradient(135deg,var(--cyan),var(--teal));color:var(--navy);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;padding:14px 28px;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .3s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(0,180,230,.2)}
+.btn-s{background:transparent;color:var(--white);font-size:13px;font-weight:500;padding:14px 28px;border:1px solid var(--border);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;transition:all .3s}
+.btn-s:hover{border-color:var(--cyan);color:var(--cyan)}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);background:rgba(12,26,46,.6)}
+.stat{padding:20px 16px;border-right:1px solid var(--border);text-align:center}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.stat-l{font-size:11px;color:var(--grey);margin-top:4px;line-height:1.4}
+
+/* ── TICKER ── */
+.ticker{padding:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(12,26,46,.5);overflow:hidden;height:44px;display:flex;align-items:center}
+.ticker-track{display:flex;gap:64px;animation:tick 24s linear infinite;width:max-content;align-items:center}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.tick-item{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:rgba(143,164,196,.3);white-space:nowrap;letter-spacing:.15em}
+.tick-item span{color:var(--cyan);opacity:.4;margin-right:64px}
+
+/* ── SECTIONS ── */
+section{padding:96px 0}
+.sec-intro{max-width:580px;margin-bottom:56px}
+.sec-label{margin-bottom:14px}
+h2.sec-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3.5vw,40px);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:16px;color:var(--white)}
+.sec-desc{font-size:14px;line-height:1.8;color:var(--grey2)}
+
+/* ── PROBLEM ── */
+#problem{background:var(--navy)}
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.prob-item{padding:36px 32px;background:var(--navy);border:none;transition:background .3s}
+.prob-item:hover{background:var(--navy2)}
+.prob-num{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;color:rgba(0,180,230,.08);line-height:1;margin-bottom:12px}
+.prob-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:10px;color:var(--white)}
+.prob-desc{font-size:13px;line-height:1.75;color:var(--grey2)}
+
+/* ── SOLUTION ── */
+#solution{background:var(--navy2)}
+.sol-header{text-align:center;max-width:600px;margin:0 auto 60px}
+.transform-row{display:flex;align-items:stretch;justify-content:center;margin-bottom:64px;background:var(--navy);border:1px solid var(--border)}
+.t-box{text-align:center;padding:36px 48px;flex:1}
+.t-box.hi{background:linear-gradient(135deg,rgba(0,180,230,.08),rgba(0,212,176,.04));border-left:1px solid var(--border);border-right:1px solid var(--border)}
+.t-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);margin-bottom:10px}
+.t-val{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.t-arrow{display:flex;align-items:center;padding:0 24px;color:var(--cyan);font-size:20px;opacity:.4;flex-shrink:0}
+.t-sub{font-size:13px;color:var(--grey2);margin-top:8px}
+.deliv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+.deliv-card{padding:32px 24px;background:var(--navy2);text-align:center;transition:background .3s}
+.deliv-card:hover{background:var(--navy3)}
+.deliv-num{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;color:var(--cyan);line-height:1;margin-bottom:8px}
+.deliv-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:8px;color:var(--white)}
+.deliv-desc{font-size:12px;color:var(--grey2);line-height:1.65}
+
+/* ── PROCESS ── */
+#process{background:var(--navy)}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:56px;border:1px solid var(--border)}
+.step{padding:28px 20px;border-right:1px solid var(--border);position:relative}
+.step:last-child{border-right:none}
+.step-no{width:40px;height:40px;border:1px solid rgba(0,180,230,.4);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;color:var(--cyan);margin-bottom:16px}
+.step-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;margin-bottom:10px;color:var(--white)}
+.step-desc{font-size:12px;line-height:1.7;color:var(--grey2)}
+
+/* ── PRICING ── */
+#pricing{background:var(--navy2)}
+.pricing-header{text-align:center;margin-bottom:56px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.p-card{padding:40px 32px;background:var(--navy2);position:relative;transition:background .3s}
+.p-card:hover{background:var(--navy3)}
+.p-card.featured{background:linear-gradient(160deg,rgba(0,180,230,.08),rgba(0,212,176,.03))}
+.p-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--cyan);color:var(--navy);font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;padding:5px 16px;white-space:nowrap}
+.p-tier{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
+.p-name{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:8px;color:var(--white)}
+.p-name span{color:var(--cyan)}
+.p-price-block{margin:24px 0;padding:24px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.p-amount{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;line-height:1;color:var(--white)}
+.p-amount sup{font-size:18px;vertical-align:top;margin-top:8px;display:inline-block}
+.p-per{font-size:13px;color:var(--grey);margin-top:6px}
+.p-founder{font-size:12px;color:var(--teal);margin-top:4px}
+.p-feats{list-style:none;margin-bottom:28px}
+.p-feats li{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;color:var(--grey2);line-height:1.5}
+.p-feats li::before{content:'';width:13px;height:13px;min-width:13px;background:var(--cyan);clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0%,43% 62%);margin-top:2px;opacity:.75}
+.p-btn{width:100%;padding:14px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;cursor:pointer;text-decoration:none;display:block;text-align:center;transition:all .3s}
+.p-btn.outline{background:transparent;border:1px solid var(--border);color:var(--white)}
+.p-btn.outline:hover{border-color:var(--cyan);color:var(--cyan)}
+.p-btn.solid{background:linear-gradient(135deg,var(--cyan),var(--teal));border:none;color:var(--navy)}
+.p-btn.solid:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(0,180,230,.25)}
+.guarantee{margin-top:48px;padding:36px 40px;border:1px solid rgba(0,212,176,.2);background:rgba(0,212,176,.03);display:flex;align-items:flex-start;gap:28px}
+.g-icon{font-size:36px;flex-shrink:0;line-height:1}
+.g-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--teal);margin-bottom:6px}
+.g-text{font-size:13px;color:var(--grey2);line-height:1.7}
+
+/* ── FOUNDER ── */
+#founder{background:var(--navy)}
+.founder-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.founder-quote{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;line-height:1.45;margin-bottom:20px;color:var(--white)}
+.founder-quote em{font-style:normal;color:var(--cyan)}
+.founder-text{font-size:14px;line-height:1.8;color:var(--grey2)}
+.founder-card{padding:36px;border:1px solid var(--border);background:var(--navy2);position:relative;overflow:hidden}
+.founder-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--teal))}
+.f-avatar{width:52px;height:52px;background:linear-gradient(135deg,var(--cyan),var(--teal));display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--navy);margin-bottom:16px}
+.f-name{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:3px;color:var(--white)}
+.f-role{font-size:12px;color:var(--cyan);letter-spacing:.1em;margin-bottom:14px}
+.f-bio{font-size:13px;line-height:1.75;color:var(--grey2)}
+
+/* ── CTA ── */
+#cta{background:var(--navy2);text-align:center;position:relative;overflow:hidden}
+.cta-glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(0,180,230,.06) 0%,transparent 70%);pointer-events:none}
+.cta-inner{position:relative;z-index:2;max-width:560px;margin:0 auto}
+.cta-counter{display:inline-flex;align-items:center;gap:10px;background:rgba(0,180,230,.08);border:1px solid var(--border);padding:8px 18px;margin-bottom:28px}
+.cta-n{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--cyan)}
+.cta-txt{font-size:13px;color:var(--grey2)}
+.cta-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,44px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-bottom:16px;color:var(--white)}
+.cta-sub{font-size:15px;color:var(--grey2);line-height:1.7;margin-bottom:36px}
+.cta-form{display:flex;max-width:440px;margin:0 auto 14px}
+.cta-email{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--border);border-right:none;color:var(--white);font-family:'Inter',sans-serif;font-size:14px;padding:14px 18px;outline:none;transition:border-color .2s}
+.cta-email:focus{border-color:var(--cyan)}
+.cta-email::placeholder{color:var(--grey)}
+.cta-go{background:linear-gradient(135deg,var(--cyan),var(--teal));border:none;color:var(--navy);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;padding:14px 24px;cursor:pointer;white-space:nowrap;transition:filter .2s}
+.cta-go:hover{filter:brightness(1.08)}
+.cta-note{font-size:12px;color:rgba(143,164,196,.45)}
+
+/* ── FOOTER ── */
+footer{background:var(--navy);padding:40px 0;border-top:1px solid var(--border)}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.foot-links{display:flex;gap:24px;list-style:none;flex-wrap:wrap}
+.foot-links a{font-size:13px;color:var(--grey);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--cyan)}
+.foot-copy{font-size:12px;color:rgba(107,130,168,.4)}
+
+/* ── ANIMATIONS ── */
+.fi{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.fi.v{opacity:1;transform:translateY(0)}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .wrap{padding:0 16px}
+  .nav-inner{padding:0 16px}
+  .nav-links{display:none}
+  #hero{padding:84px 0 60px;min-height:auto}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .stat{padding:14px 12px}
+  .stat-n{font-size:20px}
+  .prob-grid{grid-template-columns:1fr}
+  .transform-row{flex-direction:column}
+  .t-box{padding:24px 20px}
+  .t-box.hi{border-left:none;border-right:none;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .t-arrow{transform:rotate(90deg);padding:12px 0;justify-content:center}
+  .deliv-grid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .step{border-bottom:1px solid var(--border)}
+  .step:nth-child(2n){border-right:none}
+  .pricing-grid{grid-template-columns:1fr}
+  .founder-grid{grid-template-columns:1fr;gap:36px}
+  .guarantee{flex-direction:column;gap:16px;padding:24px 20px}
+  .cta-form{flex-direction:column}
+  .cta-email{border-right:1px solid var(--border);border-bottom:none}
+  .foot-inner{flex-direction:column;text-align:center}
+  .foot-links{justify-content:center}
+  .hero-btns{flex-direction:column}
+  .btn-p,.btn-s{justify-content:center;text-align:center}
+  section{padding:64px 0}
+}
+@media(max-width:480px){
+  .steps{grid-template-columns:1fr}
+  .step{border-right:none}
+  .deliv-grid{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .hero-title{font-size:28px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <svg width="28" height="28" viewBox="0 0 36 36" fill="none">
+        <polygon points="18,2 34,34 2,34" fill="none" stroke="url(#ng)" stroke-width="2.5"/>
+        <polygon points="18,10 28,28 8,28" fill="url(#ng)" opacity="0.22"/>
+        <defs><linearGradient id="ng" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00B4E6"/><stop offset="100%" stop-color="#00D4B0"/></linearGradient></defs>
+      </svg>
+      <span class="logo-text">North<span>stack</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#problem" class="pt">Problema</a><a href="#problem" class="en" style="display:none">Problem</a></li>
+      <li><a href="#solution" class="pt">Solução</a><a href="#solution" class="en" style="display:none">Solution</a></li>
+      <li><a href="#process" class="pt">Processo</a><a href="#process" class="en" style="display:none">Process</a></li>
+      <li><a href="#pricing" class="pt">Preços</a><a href="#pricing" class="en" style="display:none">Pricing</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="lang-btn on" onclick="setLang('pt')">PT</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <a href="#cta" class="nav-cta pt">Auditoria Gratuita</a>
+      <a href="#cta" class="nav-cta en" style="display:none">Free Audit</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div><div class="hero-glow2"></div><div class="hero-grid"></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <div class="hero-dot"></div>
+        <span class="mono pt">Portugal · 2026 · Apenas 10 Clientes Fundadores</span>
+        <span class="mono en" style="display:none">Portugal · 2026 · Only 10 Founding Clients</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="pt">Transformamos o seu conteúdo<br>em <span class="hl">crescimento</span><br><span class="ghost">previsível.</span></span>
+        <span class="en" style="display:none">We turn your content into<br><span class="hl">predictable</span><br><span class="ghost">growth.</span></span>
+      </h1>
+      <p class="hero-sub pt">Se já cria conteúdo mas não converte em clientes, a <strong>North Stack</strong> constrói a infraestrutura que falta — estratégia, repurposing e distribuição inteligente.</p>
+      <p class="hero-sub en" style="display:none">If you create content but aren't converting clients, <strong>North Stack</strong> builds the missing infrastructure — strategy, repurposing and smart distribution.</p>
+      <div class="hero-btns">
+        <a href="#cta" class="btn-p"><span class="pt">→ Auditoria Gratuita</span><span class="en" style="display:none">→ Free Audit</span></a>
+        <a href="#solution" class="btn-s"><span class="pt">Ver como funciona</span><span class="en" style="display:none">See how it works</span></a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-n">1→26</div><div class="stat-l pt">Peças por vídeo</div><div class="stat-l en" style="display:none">Pieces per video</div></div>
+        <div class="stat"><div class="stat-n">72h</div><div class="stat-l pt">Entrega garantida</div><div class="stat-l en" style="display:none">Guaranteed delivery</div></div>
+        <div class="stat"><div class="stat-n">5x</div><div class="stat-l pt">Mais output</div><div class="stat-l en" style="display:none">More output</div></div>
+        <div class="stat"><div class="stat-n">60d</div><div class="stat-l pt">Garantia</div><div class="stat-l en" style="display:none">Guarantee</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="tick-item">INSTAGRAM REELS<span>✦</span></span><span class="tick-item">TIKTOK<span>✦</span></span><span class="tick-item">YOUTUBE SHORTS<span>✦</span></span><span class="tick-item">LINKEDIN<span>✦</span></span><span class="tick-item">NEWSLETTER<span>✦</span></span><span class="tick-item">TWITTER / X<span>✦</span></span>
+    <span class="tick-item">INSTAGRAM REELS<span>✦</span></span><span class="tick-item">TIKTOK<span>✦</span></span><span class="tick-item">YOUTUBE SHORTS<span>✦</span></span><span class="tick-item">LINKEDIN<span>✦</span></span><span class="tick-item">NEWSLETTER<span>✦</span></span><span class="tick-item">TWITTER / X<span>✦</span></span>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="wrap">
+    <div class="sec-intro fi">
+      <p class="mono sec-label pt">O Diagnóstico</p>
+      <p class="mono sec-label en" style="display:none">The Diagnosis</p>
+      <h2 class="sec-title pt">Cria conteúdo.<br>Mas não tem sistema.</h2>
+      <h2 class="sec-title en" style="display:none">You create content.<br>But have no system.</h2>
+      <p class="sec-desc pt">Enquanto publica 4 vídeos por mês, poderia estar a distribuir 40 activos estratégicos a trabalhar por si 24h por dia.</p>
+      <p class="sec-desc en" style="display:none">While you publish 4 videos a month, you could be distributing 40 strategic assets working for you 24/7.</p>
+    </div>
+    <div class="prob-grid">
+      <div class="prob-item fi"><div class="prob-num">01</div><h3 class="prob-title pt">Sem distribuição estratégica</h3><h3 class="prob-title en" style="display:none">No strategic distribution</h3><p class="prob-desc pt">O conteúdo fica confinado a uma plataforma e desaparece em 24-48h sem gerar valor acumulado.</p><p class="prob-desc en" style="display:none">Content stays on one platform and disappears in 24-48h without accumulating value.</p></div>
+      <div class="prob-item fi"><div class="prob-num">02</div><h3 class="prob-title pt">Sem consistência</h3><h3 class="prob-title en" style="display:none">No consistency</h3><p class="prob-desc pt">Publicar quando há tempo não é estratégia. O algoritmo penaliza a irregularidade e o alcance colapsa.</p><p class="prob-desc en" style="display:none">Publishing when you have time isn't strategy. Algorithms penalise inconsistency.</p></div>
+      <div class="prob-item fi"><div class="prob-num">03</div><h3 class="prob-title pt">Conteúdo sem conversão</h3><h3 class="prob-title en" style="display:none">Content without conversion</h3><p class="prob-desc pt">Views são métricas de vaidade. O que importa é o sistema que transforma atenção em clientes qualificados.</p><p class="prob-desc en" style="display:none">Views are vanity metrics. What matters is the system turning attention into qualified clients.</p></div>
+      <div class="prob-item fi"><div class="prob-num">04</div><h3 class="prob-title pt">Tempo que não escala</h3><h3 class="prob-title en" style="display:none">Time that doesn't scale</h3><p class="prob-desc pt">Fazer tudo internamente cria um tecto invisível. O seu tempo vale demasiado para o gastar em edição.</p><p class="prob-desc en" style="display:none">Doing everything in-house creates an invisible ceiling. Your time is too valuable for editing.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="wrap">
+    <div class="sol-header fi">
+      <p class="mono sec-label pt">A Solução</p>
+      <p class="mono sec-label en" style="display:none">The Solution</p>
+      <h2 class="sec-title">North Stack — Content Growth Systems</h2>
+      <p class="sec-desc pt">Não gerimos redes sociais. Construímos sistemas de crescimento — infraestrutura que gera aquisição previsível de clientes.</p>
+      <p class="sec-desc en" style="display:none">We don't manage social media. We build growth systems — infrastructure that generates predictable client acquisition.</p>
+    </div>
+    <div class="transform-row fi">
+      <div class="t-box"><div class="t-label pt">Recebemos</div><div class="t-label en" style="display:none">We receive</div><div class="t-val">1</div><div class="t-sub pt">Vídeo longo</div><div class="t-sub en" style="display:none">Long video</div></div>
+      <div class="t-arrow">→</div>
+      <div class="t-box hi"><div class="t-label">North Stack</div><div style="font-size:24px;color:var(--cyan);padding:6px 0">⚡ AI + Strategy</div><div class="t-sub pt">72h de processamento</div><div class="t-sub en" style="display:none">72h processing</div></div>
+      <div class="t-arrow">→</div>
+      <div class="t-box"><div class="t-label pt">Entregamos</div><div class="t-label en" style="display:none">We deliver</div><div class="t-val">26</div><div class="t-sub pt">Peças de conteúdo</div><div class="t-sub en" style="display:none">Content pieces</div></div>
+    </div>
+    <div class="deliv-grid">
+      <div class="deliv-card fi"><div class="deliv-num">10</div><div class="deliv-name">Reels & Shorts</div><div class="deliv-desc pt">Clips verticais com hooks validados para Instagram, TikTok e YouTube</div><div class="deliv-desc en" style="display:none">Vertical clips with validated hooks for Instagram, TikTok and YouTube</div></div>
+      <div class="deliv-card fi"><div class="deliv-num">5</div><div class="deliv-name">Posts LinkedIn</div><div class="deliv-desc pt">Escritos na sua voz com estrutura de alta conversão</div><div class="deliv-desc en" style="display:none">Written in your voice with high-conversion structure</div></div>
+      <div class="deliv-card fi"><div class="deliv-num">1</div><div class="deliv-name">Newsletter</div><div class="deliv-desc pt">Email completo pronto a enviar à sua lista de clientes</div><div class="deliv-desc en" style="display:none">Complete email ready to send to your client list</div></div>
+      <div class="deliv-card fi"><div class="deliv-num">10</div><div class="deliv-name">Tweets & Threads</div><div class="deliv-desc pt">Insights formatados para máximo alcance no X/Twitter</div><div class="deliv-desc en" style="display:none">Insights formatted for maximum reach on X/Twitter</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="wrap">
+    <div class="sec-intro fi">
+      <p class="mono sec-label pt">Como Funciona</p>
+      <p class="mono sec-label en" style="display:none">How It Works</p>
+      <h2 class="sec-title pt">5 passos. Menos de 15 min<br>da sua parte por semana.</h2>
+      <h2 class="sec-title en" style="display:none">5 steps. Less than 15 min<br>from you per week.</h2>
+    </div>
+    <div class="steps">
+      <div class="step fi"><div class="step-no">01</div><h3 class="step-title pt">Diagnóstico</h3><h3 class="step-title en" style="display:none">Diagnosis</h3><p class="step-desc pt">Analisamos conteúdo actual, nicho e objectivos. Definimos estratégia de posicionamento.</p><p class="step-desc en" style="display:none">We analyse content, niche and goals. We define the positioning strategy.</p></div>
+      <div class="step fi"><div class="step-no">02</div><h3 class="step-title pt">Planeamento</h3><h3 class="step-title en" style="display:none">Planning</h3><p class="step-desc pt">Calendário editorial mensal com hooks e formatos optimizados por plataforma.</p><p class="step-desc en" style="display:none">Monthly editorial calendar with hooks and formats optimised per platform.</p></div>
+      <div class="step fi"><div class="step-no">03</div><h3 class="step-title">Repurposing</h3><p class="step-desc pt">1 vídeo → 26 peças usando IA + revisão humana estratégica.</p><p class="step-desc en" style="display:none">1 video → 26 pieces using AI + strategic human review.</p></div>
+      <div class="step fi"><div class="step-no">04</div><h3 class="step-title pt">Entrega 72h</h3><h3 class="step-title en" style="display:none">72h Delivery</h3><p class="step-desc pt">Pasta organizada com tudo pronto a publicar. Zero esforço extra da sua parte.</p><p class="step-desc en" style="display:none">Organised folder, everything ready to publish. Zero extra effort from you.</p></div>
+      <div class="step fi"><div class="step-no">05</div><h3 class="step-title pt">Optimização</h3><h3 class="step-title en" style="display:none">Optimisation</h3><p class="step-desc pt">Ajuste mensal de hooks e formatos com base em dados reais de performance.</p><p class="step-desc en" style="display:none">Monthly adjustment of hooks and formats based on real performance data.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="pricing-header fi">
+      <p class="mono sec-label pt">Investimento</p>
+      <p class="mono sec-label en" style="display:none">Investment</p>
+      <h2 class="sec-title pt">Escolha o seu stack</h2>
+      <h2 class="sec-title en" style="display:none">Choose your stack</h2>
+      <p class="sec-desc pt" style="margin-top:12px">Primeiros 10 clientes fundadores recebem 20% de desconto vitalício.</p>
+      <p class="sec-desc en" style="display:none;margin-top:12px">First 10 founding clients receive a lifetime 20% discount.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="p-card fi">
+        <div class="p-tier">Starter</div>
+        <div class="p-name">Starter <span>Stack</span></div>
+        <div class="p-price-block">
+          <div class="p-amount"><sup>€</sup>1.200</div>
+          <div class="p-per pt">/mês · sem contrato</div><div class="p-per en" style="display:none">/month · no contract</div>
+          <div class="p-founder pt">↓ €960/mês para fundadores</div><div class="p-founder en" style="display:none">↓ €960/mo for founders</div>
+        </div>
+        <ul class="p-feats">
+          <li><span class="pt">12 Reels & Shorts/mês</span><span class="en" style="display:none">12 Reels & Shorts/month</span></li>
+          <li><span class="pt">6 Posts LinkedIn</span><span class="en" style="display:none">6 LinkedIn Posts</span></li>
+          <li>2 Newsletters</li>
+          <li><span class="pt">Planeamento mensal</span><span class="en" style="display:none">Monthly planning</span></li>
+          <li><span class="pt">Entrega 72h garantida</span><span class="en" style="display:none">72h guaranteed delivery</span></li>
+          <li><span class="pt">1 reunião mensal</span><span class="en" style="display:none">1 monthly meeting</span></li>
+        </ul>
+        <a href="#cta" class="p-btn outline pt">Começar →</a>
+        <a href="#cta" class="p-btn outline en" style="display:none">Get Started →</a>
+      </div>
+      <div class="p-card featured fi">
+        <div class="p-badge pt">MAIS POPULAR</div>
+        <div class="p-badge en" style="display:none">MOST POPULAR</div>
+        <div class="p-tier">Growth</div>
+        <div class="p-name">Growth <span>Stack</span></div>
+        <div class="p-price-block">
+          <div class="p-amount"><sup>€</sup>2.000</div>
+          <div class="p-per pt">/mês · sem contrato</div><div class="p-per en" style="display:none">/month · no contract</div>
+          <div class="p-founder pt">↓ €1.600/mês para fundadores</div><div class="p-founder en" style="display:none">↓ €1.600/mo for founders</div>
+        </div>
+        <ul class="p-feats">
+          <li><span class="pt">20 Reels & Shorts/mês</span><span class="en" style="display:none">20 Reels & Shorts/month</span></li>
+          <li><span class="pt">10 Posts LinkedIn</span><span class="en" style="display:none">10 LinkedIn Posts</span></li>
+          <li>4 Newsletters</li>
+          <li><span class="pt">Estratégia completa de hooks</span><span class="en" style="display:none">Complete hook strategy</span></li>
+          <li><span class="pt">Relatório mensal de crescimento</span><span class="en" style="display:none">Monthly growth report</span></li>
+          <li><span class="pt">Reunião quinzenal estratégica</span><span class="en" style="display:none">Bi-weekly strategy meeting</span></li>
+          <li><span class="pt">Entrega 72h garantida</span><span class="en" style="display:none">72h guaranteed delivery</span></li>
+        </ul>
+        <a href="#cta" class="p-btn solid pt">Começar →</a>
+        <a href="#cta" class="p-btn solid en" style="display:none">Get Started →</a>
+      </div>
+      <div class="p-card fi">
+        <div class="p-tier">Authority</div>
+        <div class="p-name">Authority <span>Stack</span></div>
+        <div class="p-price-block">
+          <div class="p-amount"><sup>€</sup>3.500</div>
+          <div class="p-per pt">/mês · sem contrato</div><div class="p-per en" style="display:none">/month · no contract</div>
+          <div class="p-founder pt">↓ €2.800/mês para fundadores</div><div class="p-founder en" style="display:none">↓ €2.800/mo for founders</div>
+        </div>
+        <ul class="p-feats">
+          <li><span class="pt">30 Reels & Shorts/mês</span><span class="en" style="display:none">30 Reels & Shorts/month</span></li>
+          <li><span class="pt">20 Posts LinkedIn</span><span class="en" style="display:none">20 LinkedIn Posts</span></li>
+          <li><span class="pt">4 Newsletters + sequências</span><span class="en" style="display:none">4 Newsletters + sequences</span></li>
+          <li><span class="pt">Gestão completa de distribuição</span><span class="en" style="display:none">Full distribution management</span></li>
+          <li><span class="pt">Estratégia avançada semanal</span><span class="en" style="display:none">Weekly advanced strategy</span></li>
+          <li><span class="pt">Account manager dedicado</span><span class="en" style="display:none">Dedicated account manager</span></li>
+        </ul>
+        <a href="#cta" class="p-btn outline pt">Falar com equipa →</a>
+        <a href="#cta" class="p-btn outline en" style="display:none">Talk to team →</a>
+      </div>
+    </div>
+    <div class="guarantee fi">
+      <div class="g-icon">🛡</div>
+      <div>
+        <div class="g-title pt">Garantia de 60 dias</div>
+        <div class="g-title en" style="display:none">60-day guarantee</div>
+        <div class="g-text pt">Se após 60 dias não houver crescimento claro e mensurável, continuamos a trabalhar gratuitamente até ajustar o sistema. Sem riscos, sem letras pequenas.</div>
+        <div class="g-text en" style="display:none">If after 60 days there's no clear measurable growth, we keep working for free until the system is adjusted. No risk, no fine print.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section id="founder">
+  <div class="wrap">
+    <div class="founder-grid">
+      <div class="fi">
+        <p class="mono sec-label pt" style="margin-bottom:20px">O Fundador</p>
+        <p class="mono sec-label en" style="display:none;margin-bottom:20px">The Founder</p>
+        <div class="founder-quote pt">"O mercado português vende <em>gestão de redes</em>. Nós vendemos <em>infraestrutura de crescimento</em>."</div>
+        <div class="founder-quote en" style="display:none">"The Portuguese market sells <em>social media management</em>. We sell <em>growth infrastructure</em>."</div>
+        <p class="founder-text pt">A North Stack nasceu da frustração de ver criadores e empresas com conhecimento genuíno a perder clientes por falta de distribuição estratégica. Um único vídeo pode gerar meses de conteúdo — a maioria simplesmente não tem o sistema para o fazer.</p>
+        <p class="founder-text en" style="display:none">North Stack was born from the frustration of seeing creators with genuine knowledge losing clients due to lack of strategic distribution. A single video can generate months of content — most people simply don't have the system.</p>
+      </div>
+      <div class="fi">
+        <div class="founder-card">
+          <div class="f-avatar">M</div>
+          <div class="f-name">Melquizedeque</div>
+          <div class="f-role pt">Fundador · North Stack</div>
+          <div class="f-role en" style="display:none">Founder · North Stack</div>
+          <div class="f-bio pt">Designer de identidade visual e consultor de posicionamento estratégico. Especializado em sistemas de conteúdo para o mercado português e europeu. Trabalha com fundadores e criadores que querem escalar a presença sem aumentar o tempo de produção.</div>
+          <div class="f-bio en" style="display:none">Visual identity designer and strategic positioning consultant. Specialised in content systems for the Portuguese and European market. Works with founders who want to scale their presence without increasing production time.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-glow"></div>
+  <div class="wrap">
+    <div class="cta-inner">
+      <div class="cta-counter fi">
+        <span class="cta-n">7</span>
+        <span class="cta-txt pt">vagas fundadoras restantes</span>
+        <span class="cta-txt en" style="display:none">founding spots remaining</span>
+      </div>
+      <h2 class="cta-title fi pt">Pronto para construir<br>o seu stack?</h2>
+      <h2 class="cta-title fi en" style="display:none">Ready to build<br>your stack?</h2>
+      <p class="cta-sub fi pt">Agende uma auditoria estratégica gratuita de 30 minutos. Mostramos exactamente o que seria possível com o sistema North Stack.</p>
+      <p class="cta-sub fi en" style="display:none">Book a free 30-minute strategic audit. We show you exactly what's possible with the North Stack system.</p>
+      <div class="cta-form fi">
+        <input type="email" class="cta-email" placeholder="o-seu-email@empresa.pt">
+        <button class="cta-go pt">→ Agendar</button>
+        <button class="cta-go en" style="display:none">→ Book</button>
+      </div>
+      <p class="cta-note fi pt">Sem spam. Sem compromisso. Resposta em menos de 24 horas.</p>
+      <p class="cta-note fi en" style="display:none">No spam. No commitment. Response within 24 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-inner">
+    <a href="#" class="logo" style="text-decoration:none">
+      <svg width="24" height="24" viewBox="0 0 36 36" fill="none"><polygon points="18,2 34,34 2,34" fill="none" stroke="url(#fg)" stroke-width="2.5"/><defs><linearGradient id="fg" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00B4E6"/><stop offset="100%" stop-color="#00D4B0"/></linearGradient></defs></svg>
+      <span class="logo-text" style="font-size:14px">North<span>stack</span></span>
+    </a>
+    <ul class="foot-links">
+      <li><a href="#problem"><span class="pt">Problema</span><span class="en" style="display:none">Problem</span></a></li>
+      <li><a href="#solution"><span class="pt">Solução</span><span class="en" style="display:none">Solution</span></a></li>
+      <li><a href="#pricing"><span class="pt">Preços</span><span class="en" style="display:none">Pricing</span></a></li>
+      <li><a href="#cta"><span class="pt">Contacto</span><span class="en" style="display:none">Contact</span></a></li>
+    </ul>
+    <p class="foot-copy">© 2026 North Stack · Portugal</p>
+  </div>
+</footer>
+
+<script>
+function setLang(l){
+  document.querySelectorAll('.pt').forEach(e=>e.style.display=l==='pt'?'':'none');
+  document.querySelectorAll('.en').forEach(e=>e.style.display=l==='en'?'':'none');
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('on',b.textContent.trim().toLowerCase()===l));
+}
+setLang('pt');
+
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('v'),i*60);obs.unobserve(e.target);}});
+},{threshold:.07});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').style.background=window.scrollY>50?'rgba(7,17,31,.98)':'rgba(7,17,31,.92)';
+},{ passive:true });
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
