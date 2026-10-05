@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Northstack helps B2B founders turn expertise into clear positioning, market authority and a reputation buyers remember.">
+<meta property="og:title" content="Northstack — Founder Authority Systems">
+<meta property="og:description" content="Turn founder expertise into market authority, discoverability and qualified conversations.">
+<title>Northstack — Founder Authority Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#090909;--panel:#11110f;--gold:#c9a86a;--gold2:#e2c88f;--text:#f4f1ea;--muted:#aaa69d;--line:rgba(201,168,106,.22);--max:1120px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;line-height:1.6}a{color:inherit;text-decoration:none}.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}.mono{font:500 11px "DM Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}nav{position:fixed;top:0;left:0;right:0;z-index:20;background:rgba(9,9,9,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06)}.nav{height:72px;display:flex;align-items:center;justify-content:space-between}.logo{font:700 19px "DM Sans";letter-spacing:-.04em}.logo span{color:var(--gold)}.navlinks{display:flex;gap:28px;color:#b9b5ac;font-size:13px}.navlinks a:hover{color:var(--gold2)}.navcta{border:1px solid var(--gold);padding:10px 17px;font-size:12px;font-weight:700}.navcta:hover{background:var(--gold);color:#111}
+section{padding:110px 0}.hero{min-height:92vh;display:flex;align-items:center;padding-top:150px;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;width:700px;height:700px;right:-250px;top:80px;background:radial-gradient(circle,rgba(201,168,106,.12),transparent 68%);pointer-events:none}.eyebrow{margin-bottom:24px}.hero h1{font:700 clamp(48px,7vw,82px)/.98 "Playfair Display",serif;letter-spacing:-.045em;max-width:900px;margin:0 0 28px}.hero h1 em{color:var(--gold2);font-style:normal}.hero p{font-size:19px;line-height:1.7;color:var(--muted);max-width:690px;margin:0 0 36px}.buttons{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;padding:15px 23px;font-weight:700;font-size:13px;letter-spacing:.01em;border:1px solid var(--gold)}.btn.primary{background:var(--gold);color:#111}.btn.primary:hover{background:var(--gold2)}.btn.secondary{color:var(--text);border-color:rgba(255,255,255,.2)}.btn.secondary:hover{border-color:var(--gold);color:var(--gold2)}.micro{margin-top:18px;font-size:11px!important;color:#77736b!important}
+.statement{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0;background:#0d0d0c}.statement p{margin:0;font:600 19px/1.5 "Playfair Display",serif;text-align:center;color:#ddd8ce}.statement span{color:var(--gold)}
+.sectionhead{max-width:680px;margin-bottom:55px}.sectionhead h2{font:700 clamp(34px,4.5vw,56px)/1.05 "Playfair Display";letter-spacing:-.035em;margin:12px 0 18px}.sectionhead p{color:var(--muted);font-size:16px;max-width:650px}
+.problem{background:#0d0d0c}.grid4{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}.card{padding:30px 25px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.num{font:500 12px "DM Mono";color:var(--gold);margin-bottom:28px}.card h3{font-size:18px;margin:0 0 10px}.card p{font-size:13px;color:var(--muted);margin:0}
+.system{background:#0a0a09}.systemgrid{display:grid;grid-template-columns:1fr 1fr;gap:2px}.systemcard{padding:34px;background:var(--panel);border:1px solid rgba(255,255,255,.06)}.systemcard h3{font:600 23px "Playfair Display";margin:0 0 9px}.systemcard p{font-size:14px;color:var(--muted);margin:0}.flow{margin-top:2px;padding:34px;background:#0e0e0c;border:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.flow span{font:500 11px "DM Mono";color:var(--gold2)}.flow i{color:#666;font-style:normal}
+.offer{background:#0d0d0c}.offerbox{display:grid;grid-template-columns:1.1fr .9fr;border:1px solid var(--line);background:linear-gradient(135deg,#13120f,#0c0c0b)}.offerleft{padding:48px}.offerleft h2{font:700 43px/1.05 "Playfair Display";margin:12px 0 20px}.offerleft p{color:var(--muted);max-width:570px}.checklist{list-style:none;padding:0;margin:28px 0}.checklist li{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:14px}.checklist li:before{content:"✓";color:var(--gold);margin-right:11px}.offercta{padding:48px;border-left:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}.offercta .small{color:var(--muted);font-size:13px;margin:0 0 8px}.offercta .big{font:600 27px/1.25 "Playfair Display";margin:0 0 22px}.offercta .note{font-size:11px;color:#77736b;margin-top:14px}
+.proof{background:#090909}.proofgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.proofcard{border:1px solid rgba(255,255,255,.1);padding:34px;background:#0d0d0c}.proofcard h3{font:600 25px "Playfair Display";margin:10px 0}.proofcard p{color:var(--muted);font-size:14px}.tag{display:inline-block;padding:6px 9px;border:1px solid var(--line);font:10px "DM Mono";color:var(--gold)}
+.founder{background:#0d0d0c}.foundergrid{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:center}.founderportrait{aspect-ratio:1/1;background:linear-gradient(145deg,#1b1813,#0c0c0b);border:1px solid var(--line);display:flex;align-items:flex-end;padding:28px;position:relative;overflow:hidden}.founderportrait:before{content:"N";position:absolute;right:-20px;top:-60px;font:700 360px/1 "Playfair Display";color:rgba(201,168,106,.05)}.founderportrait strong{position:relative;font:600 22px "Playfair Display"}.foundertext h2{font:700 47px/1.08 "Playfair Display";margin:12px 0 20px}.foundertext p{color:var(--muted);font-size:15px}.foundertext blockquote{border-left:2px solid var(--gold);padding-left:20px;margin:28px 0;font:600 22px/1.4 "Playfair Display";color:#e8e2d8}
+.cta{padding:130px 0;background:radial-gradient(circle at 50% 40%,rgba(201,168,106,.11),transparent 45%),#0b0b0a;text-align:center}.cta h2{font:700 clamp(42px,6vw,68px)/1 "Playfair Display";letter-spacing:-.04em;max-width:850px;margin:14px auto 22px}.cta p{max-width:620px;margin:0 auto 30px;color:var(--muted);font-size:16px}.form{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:620px;margin:0 auto 10px;text-align:left}.form input,.form textarea{width:100%;background:#11110f;border:1px solid rgba(255,255,255,.14);color:var(--text);padding:14px 15px;font:14px "DM Sans";outline:none}.form input:focus,.form textarea:focus{border-color:var(--gold)}.form textarea{grid-column:1/-1;min-height:95px;resize:vertical}.form button{grid-column:1/-1;cursor:pointer}.success{display:none;margin:15px auto;color:var(--gold2);font-size:13px}.fine{font-size:11px!important;color:#6e6b65!important}
+footer{padding:34px 0;border-top:1px solid rgba(255,255,255,.07)}.footer{display:flex;justify-content:space-between;align-items:center;gap:20px}.footer p{margin:0;color:#68655f;font-size:11px}.footerlinks{display:flex;gap:20px;font-size:12px;color:#858078}
+@media(max-width:800px){.navlinks{display:none}.grid4{grid-template-columns:1fr 1fr}.systemgrid,.offerbox,.proofgrid,.foundergrid{grid-template-columns:1fr}.offercta{border-left:0;border-top:1px solid var(--line)}.founderportrait{max-width:520px}.form{grid-template-columns:1fr}.form textarea{grid-column:auto}.hero h1{font-size:48px}.footer{flex-direction:column;text-align:center}}
+@media(max-width:500px){.wrap{width:min(var(--max),calc(100% - 28px))}.grid4{grid-template-columns:1fr}.hero{padding-top:120px}.hero h1{font-size:42px}.hero p{font-size:17px}.offerleft,.offercta{padding:30px}.offerleft h2,.foundertext h2{font-size:36px}.navcta{padding:9px 11px}.flow{display:grid;grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav">
+<a class="logo" href="#">north<span>stack</span></a>
+<div class="navlinks"><a href="#system">System</a><a href="#offer">Diagnostic</a><a href="#research">Research</a><a href="#founder">Founder</a></div>
+<a class="navcta" href="#book">Book a Call →</a>
+</div></nav>
+
+<main>
+<section class="hero"><div class="wrap">
+<div class="eyebrow mono">Northstack · Founder Authority Systems</div>
+<h1>The market doesn't reward the founder who can do everything.<br><em>It remembers the founder who stands for something.</em></h1>
+<p>Northstack helps B2B founders turn expertise into clear positioning, market authority and a reputation buyers remember — across LinkedIn, search and AI-mediated discovery.</p>
+<div class="buttons"><a class="btn primary" href="#book">Book an Authority Call →</a><a class="btn secondary" href="#system">See the System</a></div>
+<p class="micro">For B2B founders, CEOs and experts who are ready to become the obvious choice.</p>
+</div></section>
+
+<div class="statement"><div class="wrap"><p>More content is not the answer. <span>Coherent market perception is.</span></p></div></div>
+
+<section class="problem"><div class="wrap">
+<div class="sectionhead"><div class="mono">The problem</div><h2>You may be visible. But are you memorable?</h2><p>Strong expertise can still produce weak market perception when the signals around the founder don't form a coherent story.</p></div>
+<div class="grid4">
+<div class="card"><div class="num">01</div><h3>Positioning is blurry</h3><p>Your experience is broad, but buyers cannot quickly explain what makes you different.</p></div>
+<div class="card"><div class="num">02</div><h3>Content is fragmented</h3><p>Posts, interviews and ideas exist — but they do not compound into one recognizable market narrative.</p></div>
+<div class="card"><div class="num">03</div><h3>Authority is underbuilt</h3><p>You have knowledge. The market lacks enough public evidence to associate you with a clear category.</p></div>
+<div class="card"><div class="num">04</div><h3>Discovery is changing</h3><p>Buyers increasingly encounter expertise through search, social proof and AI systems that synthesize public signals.</p></div>
+</div>
+</div></section>
+
+<section id="system" class="system"><div class="wrap">
+<div class="sectionhead"><div class="mono">The Northstack Authority System™</div><h2>Build one coherent market memory.</h2><p>We do not optimize every channel in isolation. We build the authority infrastructure behind the founder.</p></div>
+<div class="systemgrid">
+<div class="systemcard"><div class="mono">01 · Positioning</div><h3>Own a sharper category.</h3><p>Define the problem you want to be known for, the buyer you want to attract and the reason your approach deserves attention.</p></div>
+<div class="systemcard"><div class="mono">02 · Narrative</div><h3>Give your expertise a point of view.</h3><p>Turn experience, beliefs and proprietary thinking into a narrative the market can recognize and repeat.</p></div>
+<div class="systemcard"><div class="mono">03 · Authority Assets</div><h3>Make expertise visible.</h3><p>Build research, frameworks, essays, LinkedIn content and proof assets that reinforce the same strategic position.</p></div>
+<div class="systemcard"><div class="mono">04 · Discoverability</div><h3>Become easier to find and understand.</h3><p>Structure the public signals that influence human buyers, search engines and AI-mediated discovery.</p></div>
+</div>
+<div class="flow"><span>POSITIONING</span><i>→</i><span>LANGUAGE</span><i>→</i><span>AUTHORITY ASSETS</span><i>→</i><span>RECOGNITION</span><i>→</i><span>TRUST</span><i>→</i><span>CONVERSATIONS</span></div>
+</div></section>
+
+<section id="offer" class="offer"><div class="wrap">
+<div class="sectionhead"><div class="mono">Start here</div><h2>Authority Positioning Diagnostic</h2><p>A focused strategic assessment for founders who want to understand the gap between what they know and what the market understands about them.</p></div>
+<div class="offerbox">
+<div class="offerleft">
+<div class="tag">STRATEGIC ASSESSMENT</div>
+<h2>Find the perception gap before you spend more on content.</h2>
+<p>In one focused session, we examine the signals a serious buyer encounters when they research you and identify the highest-leverage positioning and authority opportunities.</p>
+<ul class="checklist">
+<li>Positioning and category clarity</li>
+<li>Founder narrative and message architecture</li>
+<li>LinkedIn authority signals</li>
+<li>Public proof and authority assets</li>
+<li>Search and AI discoverability signals</li>
+<li>Priority actions for the next 30–90 days</li>
+</ul>
+<a class="btn primary" href="#book">Request the Diagnostic →</a>
+</div>
+<div class="offercta">
+<p class="small">The outcome</p>
+<p class="big">A clearer position. A stronger narrative. A practical authority roadmap.</p>
+<p class="small">Not a generic marketing audit. Not a content calendar.</p>
+<p class="note">If there is no strategic fit, we will tell you. The goal is clarity first.</p>
+</div>
+</div>
+</div></section>
+
+<section id="research" class="proof"><div class="wrap">
+<div class="sectionhead"><div class="mono">Proof of thinking</div><h2>We build authority from original thinking.</h2><p>Northstack's public research and proprietary frameworks are designed to turn complex market shifts into usable strategic systems.</p></div>
+<div class="proofgrid">
+<div class="proofcard"><span class="tag">NORTHSTACK RESEARCH</span><h3>The Founder Discoverability Stack</h3><p>Positioning → Language → Authority Assets → Recognition → Validation → Discovery → Conversations.</p></div>
+<div class="proofcard"><span class="tag">PROPRIETARY FRAMEWORK</span><h3>The Founder-Asset Flywheel</h3><p>Turn founder expertise into reusable intellectual assets that compound across content, sales and market perception.</p></div>
+<div class="proofcard"><span class="tag">RESEARCH</span><h3>The New B2B Trust Stack</h3><p>AI is accelerating discovery. Trust is becoming the scarce layer between being found and being chosen.</p></div>
+<div class="proofcard"><span class="tag">POSITIONING</span><h3>From Expertise to Market Memory</h3><p>The strategic shift from simply demonstrating expertise to building a recognizable position in the buyer's mind.</p></div>
+</div>
+</div></section>
+
+<section id="founder" class="founder"><div class="wrap foundergrid">
+<div class="founderportrait"><strong>Northstack Vision</strong></div>
+<div class="foundertext">
+<div class="mono">The founder</div>
+<h2>Strategy before scale.</h2>
+<p>Northstack was built around a simple observation: many capable founders do not have an expertise problem. They have a perception problem.</p>
+<blockquote>“Your market cannot remember everything you know. It remembers what you consistently stand for.”</blockquote>
+<p>My work sits at the intersection of positioning, founder authority, research-led content and AI-era discoverability — turning expertise into a system the market can understand, trust and act on.</p>
+<div class="buttons"><a class="btn secondary" href="https://www.linkedin.com/" target="_blank" rel="noopener">Connect on LinkedIn →</a></div>
+</div>
+</div></section>
+
+<section id="book" class="cta"><div class="wrap">
+<div class="mono">Strategic conversation</div>
+<h2>What should your market remember you for?</h2>
+<p>If you are a B2B founder with real expertise but your positioning still feels broader, quieter or less differentiated than it should, let's look at the gap.</p>
+<form class="form" id="leadForm">
+<input required name="name" placeholder="Your name">
+<input required type="email" name="email" placeholder="Work email">
+<input name="company" placeholder="Company">
+<input name="linkedin" placeholder="LinkedIn URL">
+<textarea name="message" placeholder="What are you trying to become known for?"></textarea>
+<button class="btn primary" type="submit">Request an Authority Call →</button>
+</form>
+<div class="success" id="success">Thank you. Your request is ready to send. We'll be in touch.</div>
+<p class="fine">No pressure. No generic pitch. Just a strategic conversation about your market position.</p>
+</div></section>
+</main>
+
+<footer><div class="wrap footer"><div class="logo">north<span>stack</span></div><div class="footerlinks"><a href="#system">System</a><a href="#offer">Diagnostic</a><a href="#research">Research</a><a href="#book">Book a Call</a></div><p>© 2026 Northstack Vision</p></div></footer>
+
+<script>
+const form=document.getElementById('leadForm');
+form.addEventListener('submit',e=>{
+ e.preventDefault();
+ const d=new FormData(form);
+ const subject=encodeURIComponent('Northstack Authority Call — '+(d.get('name')||'New lead'));
+ const body=encodeURIComponent(
+  'Name: '+d.get('name')+'\n'+
+  'Email: '+d.get('email')+'\n'+
+  'Company: '+d.get('company')+'\n'+
+  'LinkedIn: '+d.get('linkedin')+'\n\n'+
+  'What they want to be known for:\n'+d.get('message')
+ );
+ window.location.href='mailto:hello@northstackvision.com?subject='+subject+'&body='+body;
+ document.getElementById('success').style.display='block';
+});
+</script>
+</body>
+</html>
